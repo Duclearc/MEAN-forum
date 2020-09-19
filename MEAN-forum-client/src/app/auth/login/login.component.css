@@ -1,0 +1,20 @@
+mat-form-field,
+input,
+button,
+div {
+  width: 100%;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-icon {
+  margin-bottom: 0.2rem;
+  margin-left: 0.2rem;
+}
+
+#regButton {
+  background-color: #ffff00;
+}
+

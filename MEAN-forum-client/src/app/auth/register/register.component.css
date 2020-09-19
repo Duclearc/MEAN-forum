@@ -1,0 +1,32 @@
+mat-form-field,
+input,
+button,
+div {
+  width: 100%;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-icon {
+  margin-bottom: 0.2rem;
+  margin-left: 0.2rem;
+}
+
+input[type = file]{
+  width: 0%;
+  visibility: hidden;
+}
+
+img {
+  display: block;
+  height: 10rem;
+  margin: auto;
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+#logButton {
+  background-color: #ffff00;
+}

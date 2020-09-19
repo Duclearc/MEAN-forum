@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  margin-top: 2rem;
+}
+
+.noPost {
+  text-align: center;
+  width: 100%;
+}
+
+mat-expansion-panel {
+  margin-bottom: 1rem;
+}
+
+mat-expansion-panel img {
+  max-height: 400px;
+  max-width: 100%;
+  display: block;
+  margin: auto;
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-paginator {
+  color: #ff4081;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 2rem;
+}

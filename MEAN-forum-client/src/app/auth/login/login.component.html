@@ -1,0 +1,59 @@
+<mat-card>
+
+  <mat-spinner
+    color="accent"
+    *ngIf="isLoading$ | async; else loadForm"
+  >
+  </mat-spinner>
+
+  <ng-template #loadForm>
+    <form
+      [formGroup]="loginForm"
+      (submit)="onLogin()"
+    >
+
+      <mat-form-field hideRequiredMarker>
+        <input
+          matInput
+          placeholder="Your Email"
+          type="email"
+          formControlName="email"
+        >
+        <mat-error *ngIf="loginForm.get('email').invalid">
+          Please insert a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field hideRequiredMarker>
+        <input
+          matInput
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        >
+        <mat-error *ngIf="loginForm.get('password').invalid">
+          Please enter a password
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+      >
+        Login
+      </button>
+
+    </form>
+  </ng-template>
+
+</mat-card>
+
+<br>
+
+<a routerLink="/register">
+  <button mat-raised-button id="regButton">
+    Don't have an account? Click here to REGISTER
+    <mat-icon>person_add</mat-icon>
+  </button>
+</a>

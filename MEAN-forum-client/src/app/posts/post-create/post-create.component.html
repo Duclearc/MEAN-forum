@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-spinner
+    color="accent"
+    *ngIf="isLoading$ | async; else loadForm"
+  >
+  </mat-spinner>
+  <ng-template #loadForm>
+    <form
+      #postForm="ngForm"
+      (submit)="onSavePost(postForm)"
+    >
+      <mat-form-field hideRequiredMarker>
+        <input
+          matInput
+          placeholder="Your post title..."
+          type="text"
+          [ngModel]="post.title"
+          name="title"
+          #title="ngModel"
+          required
+        >
+        <mat-error *ngIf="title.invalid">
+          Please insert a title
+        </mat-error>
+      </mat-form-field>
+      <button
+        *ngIf="!post.imgPath"
+        mat-button
+        type="button"
+        (click)="filePicker.click()"
+      >
+        <input
+          type="file"
+          accept="image/*"
+          #filePicker
+          name="selectedImg"
+          ngModel
+          (change)="onImgPick($event)"
+        >
+        {{imgPreview ? 'Change Image':'Add Image'}}
+        <mat-icon color="accent">
+          image
+        </mat-icon>
+      </button>
+      <img
+        *ngIf="imgPreview && imgPreview !== ''"
+        [alt]="post.title + ' image'"
+        [src]="imgPreview"
+      >
+
+      <mat-form-field hideRequiredMarker>
+        <textarea
+          matInput
+          rows="5"
+          placeholder="Your thoughts..."
+          [ngModel]="post.content"
+          name="content"
+          #content="ngModel"
+          required
+        >
+        </textarea>
+        <mat-error *ngIf="content.invalid">
+          Please enter your post's content
+        </mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+      >
+        {{mode}} Post
+      </button>
+    </form>
+  </ng-template>
+</mat-card>

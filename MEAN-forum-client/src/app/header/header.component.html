@@ -1,0 +1,84 @@
+<mat-toolbar>
+
+  <!-- website name -->
+  <a
+    routerLink="/"
+    color="accent"
+  >
+    MEAN Forum
+  </a>
+
+  <!-- spacer -->
+  <span class="spacer"></span>
+  <h1
+    *ngIf="username"
+    id="userGreeting"
+  >
+    Hello {{username}}
+  </h1>
+
+  <!-- icons -->
+
+  <a routerLink="/">
+    <button mat-icon-button>
+      <mat-icon color="accent">
+        view_agenda
+      </mat-icon>
+      <span class="buttonTitle">
+        Posts
+      </span>
+    </button>
+  </a>
+
+  <ng-container *ngIf="isAuth$ | async; else notAuthenticated">
+
+    <a routerLink="/create">
+      <button mat-icon-button>
+        <mat-icon color="accent">
+          post_add
+        </mat-icon>
+        <span class="buttonTitle">
+          Create
+        </span>
+      </button>
+    </a>
+
+    <a>
+      <button
+        mat-icon-button
+        (click)="onLogout()"
+      >
+        <mat-icon
+          *ngIf="!imgPath"
+          color="accent">
+          person
+        </mat-icon>
+        <img
+          *ngIf="imgPath"
+          id="profilePicture"
+          [src]="hostURL + imgPath"
+          alt="user profile picture"
+        >
+        <span class="buttonTitle">
+          Logout
+        </span>
+      </button>
+    </a>
+
+  </ng-container>
+
+  <ng-template #notAuthenticated>
+    <a
+      routerLink="/login"
+    >
+      <button mat-icon-button>
+        <mat-icon color="accent">
+          person_outline
+        </mat-icon>
+        <span class="buttonTitle">
+          Login
+        </span>
+      </button>
+    </a>
+  </ng-template>
+</mat-toolbar>

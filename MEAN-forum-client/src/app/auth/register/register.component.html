@@ -1,0 +1,100 @@
+<mat-card>
+
+  <mat-spinner
+    color="accent"
+    *ngIf="isLoading$ | async; else loadForm"
+  >
+  </mat-spinner>
+
+  <ng-template #loadForm>
+    <form
+      [formGroup]="registerForm"
+      (submit)="onRegister()"
+    >
+
+      <div>
+        <button
+          mat-button
+          type="button"
+          (click)="filePicker.click()"
+        >
+          <input
+            type="file"
+            accept="image/*"
+            #filePicker
+            (change)="onImgPick($event)"
+          >
+          {{imgPreview ? 'Change Image':'Add Image'}}
+          <mat-icon color="accent">
+            image
+          </mat-icon>
+        </button>
+        <img
+          *ngIf="imgPreview && imgPreview !== ''"
+          alt="preview of selected profile picture"
+          [src]="imgPreview"
+        >
+      </div>
+
+      <mat-form-field hideRequiredMarker>
+        <input
+          matInput
+          placeholder="Your Username"
+          type="text"
+          formControlName="username"
+        >
+        <mat-error *ngIf="registerForm.get('username').invalid">
+          Please insert an username
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field hideRequiredMarker>
+        <input
+          matInput
+          placeholder="Your Email"
+          type="email"
+          formControlName="email"
+        >
+        <mat-error *ngIf="registerForm.get('email').invalid">
+          Please insert a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field hideRequiredMarker>
+        <input
+          matInput
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        >
+        <mat-error *ngIf="registerForm.get('password').invalid">
+          Please enter a password
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+      >
+        Register
+      </button>
+
+    </form>
+  </ng-template>
+
+</mat-card>
+
+<br>
+
+<a routerLink="/login">
+  <button
+    mat-raised-button
+    id="logButton"
+  >
+    Already have an account? Click here to LOGIN
+    <mat-icon>
+      person
+    </mat-icon>
+  </button>
+</a>

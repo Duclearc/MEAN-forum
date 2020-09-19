@@ -1,0 +1,25 @@
+/*
+  accent: #ff4081
+  primary: #3f51b5
+*/
+a {
+  text-decoration: none;
+  color: #ff4081;
+  padding: 5px;
+}
+
+#profilePicture {
+  height: 25px;
+  border-radius: 50%;
+}
+
+.spacer,
+#userGreeting {
+  flex: 1 1 auto;
+  color: #3f51b5;
+}
+
+.buttonTitle {
+    margin-top: -20px;
+    display: flex;
+}

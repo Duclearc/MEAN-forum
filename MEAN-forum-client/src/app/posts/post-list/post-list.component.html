@@ -1,0 +1,83 @@
+<!-- LOADING POSTS -->
+<mat-spinner
+  color="accent"
+  *ngIf="isLoading$ | async"
+>
+</mat-spinner>
+
+<!-- DISPLAY POSTS -->
+<mat-accordion
+  multi="true"
+  *ngIf="postsArray?.length>0;else noPosts"
+>
+  <mat-expansion-panel *ngFor="let post of postsArray">
+
+    <mat-expansion-panel-header>
+      <h2>
+        {{post.title}}
+      </h2>
+    </mat-expansion-panel-header>
+    <img
+      *ngIf="post.imgPath"
+      [src]="hostURL + post.imgPath"
+      [alt]="post.title + ' image'"
+    >
+    <p>
+      {{post.content}}
+    </p>
+
+    <mat-action-row
+      *ngIf="isAuth && userId === post.creator"
+    >
+      <a
+        mat-button
+        color="accent"
+        routerLink="/edit/{{post._id}}"
+      >
+        <mat-icon color="accent">
+          edit
+        </mat-icon>
+      </a>
+      <button
+        mat-button
+        color="accent"
+        (click)="onDelete(post._id)"
+      >
+        <mat-icon color="accent">
+          delete
+        </mat-icon>
+      </button>
+    </mat-action-row>
+
+  </mat-expansion-panel>
+</mat-accordion>
+<br>
+
+<mat-paginator
+  *ngIf="postsArray?.length > 0"
+  [length]="totalPosts"
+  [pageSize]="itemsPerPage"
+  [pageSizeOptions]="pageSizeOptions()"
+  (page)="onChangePage($event)"
+></mat-paginator>
+
+<!-- IF THERE ARE NO POSTS -->
+<ng-template #noPosts>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h4 class="noPost">
+            No Posts Available Yet...
+          </h4>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p class="noPost">
+        add a post above to see them displayed here.
+      </p>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-template>
