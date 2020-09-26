@@ -5,7 +5,7 @@ const usersRoutes =  require('./routes/users');
 const postsRoutes = require('./routes/posts');
 const path = require('path');
 const mongoose = require('mongoose');
-require('dotenv').config({path: __dirname + '/../MEAN-forum.env'});
+require('dotenv').config({path: __dirname + '/../.env'});
 
 //setup
 const dbUser = process.env.DB_USER;
@@ -15,7 +15,7 @@ const dbName = process.env.DB_NAME;
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
-mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@mean-forum-db.cukqa.mongodb.net/${dbName}?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@duclearc-db.cukqa.mongodb.net/${dbName}?retryWrites=true&w=majority`)
     .then(() => {
         console.log('DB successfully connected');
     })

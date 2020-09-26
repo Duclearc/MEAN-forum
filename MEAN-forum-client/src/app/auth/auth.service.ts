@@ -28,7 +28,7 @@ export class AuthService {
     return this.hostURL;
   }
 
-  setUser() { //! Must always be called after this.token has been assigned!
+  setUser() { // ! Must always be called after this.token has been assigned!
     this.http.get<{ user: UserProfileData }>(this.apiURL + '/me')
       .subscribe(response => {
         this.user.next(response.user);
@@ -74,7 +74,7 @@ export class AuthService {
       this.loadingStatusListener.next(false);
       return
     } else {
-      const clearStorage = session ? true : false; //"is this the user's first login?"
+      const clearStorage = session ? true : false; // "is this the user's first login?"
       this.logoutUser(clearStorage);
     }
   }
@@ -94,18 +94,18 @@ export class AuthService {
         responseData => {
           console.log(responseData.message);
 
-          //login new user
+          // login new user
           const newUser: UserLoginData = {
             email: user.email,
             password: user.password
-          }
+          };
           this.loginUser(newUser);
         },
         err => {
           alert('This email address is taken');
           console.log(err);
         }
-      )
+      );
   }
 
   loginUser(user: UserLoginData) {
@@ -113,13 +113,13 @@ export class AuthService {
     this.http.post<{ message: string, token: string, userId: string }>(this.apiURL + '/login', user)
       .subscribe(
         responseData => {
-          //setting up the expiry date
+          // setting up the expiry date
           const now = new Date();
           const expiryHour = now.getHours() + 1;
           now.setHours(expiryHour);
           const expiryTime = now.toISOString();
 
-          //storing values
+          // storing values
           const session = JSON.stringify({
             expiry: expiryTime,
             token: responseData.token,
@@ -128,7 +128,7 @@ export class AuthService {
           this.token = responseData.token;
           this.setUser();
 
-          //sending feedback
+          // sending feedback
           console.log(responseData.message);
           this.authStatusListener.next(true);
           this.loadPage();
@@ -139,7 +139,7 @@ export class AuthService {
           this.loadingStatusListener.next(false);
         },
         () => this.loadingStatusListener.next(false)
-      )
+      );
   }
 
   logoutUser(clearStorage: boolean = true) {

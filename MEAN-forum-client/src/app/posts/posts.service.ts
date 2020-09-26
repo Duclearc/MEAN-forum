@@ -41,7 +41,7 @@ export class PostsService {
     const query = (pageSize && currentPage) ? `?pagesize=${pageSize}&page=${currentPage}` : '';
     const urlQuery = id || query;
 
-    this.http.get<{ posts: Post[] }>(`${this.apiURL}/${urlQuery}`)
+    this.http.get<{posts: Post[]}>(`${this.apiURL}/${urlQuery}`)
       .subscribe(
         payload => {
           if (id) {
@@ -84,7 +84,6 @@ export class PostsService {
           const { post } = responseData
           this.posts.push(post); //update array
           this.postsUpdated.next([...this.posts]); //'share' update
-          console.log(responseData.message); //let me know all is well
         },
         err => console.log('an error occured', err),
         () => this.loadingStatusListener.next(false)
